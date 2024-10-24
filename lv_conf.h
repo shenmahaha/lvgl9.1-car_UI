@@ -42,7 +42,8 @@
 
 #if LV_USE_STDLIB_MALLOC == LV_STDLIB_BUILTIN
     /*Size of the memory available for `lv_malloc()` in bytes (>= 2kB)*/
-    #define LV_MEM_SIZE (256 * 1024U)          /*[bytes]*/
+    // #define LV_MEM_SIZE (1024 * 1024U)          /*[bytes]*/
+    #define LV_MEM_SIZE (8 * 1024U * 1024U)          /*[bytes]*/
 
     /*Size of the memory expand for `lv_malloc()` in bytes*/
     #define LV_MEM_POOL_EXPAND_SIZE 0
@@ -662,7 +663,7 @@
 
 /*FreeType library*/
 #ifndef LV_USE_FREETYPE
-#define LV_USE_FREETYPE 0
+#define LV_USE_FREETYPE 1
 #endif
 
 #if LV_USE_FREETYPE
@@ -829,7 +830,8 @@
  *==================*/
 
 /*Use SDL to open window on PC and handle mouse and keyboard*/
-#define LV_USE_SDL              0
+//! 虚拟机：1    开发板：0
+#define LV_USE_SDL              1
 #if LV_USE_SDL
     #define LV_SDL_INCLUDE_PATH    <SDL2/SDL.h>
     #define LV_SDL_RENDER_MODE     LV_DISPLAY_RENDER_MODE_DIRECT   /*LV_DISPLAY_RENDER_MODE_DIRECT is recommended for best performance*/
@@ -839,6 +841,7 @@
 #endif
 
 /*Use X11 to open window on Linux desktop and handle mouse and keyboard*/
+
 #define LV_USE_X11              0
 #if LV_USE_X11
     #define LV_X11_DIRECT_EXIT         1  /*Exit the application when all X11 windows have been closed*/
@@ -850,7 +853,8 @@
 #endif
 
 /*Driver for /dev/fb*/
-#define LV_USE_LINUX_FBDEV      1
+//! 虚拟机：0    开发板：1
+#define LV_USE_LINUX_FBDEV      0
 #if LV_USE_LINUX_FBDEV
     #define LV_LINUX_FBDEV_BSD           0
     #define LV_LINUX_FBDEV_RENDER_MODE   LV_DISPLAY_RENDER_MODE_DIRECT
@@ -886,6 +890,7 @@
 #define LV_USE_TFT_ESPI         0
 
 /*Driver for evdev input devices*/
+//! 虚拟机：0    开发板：1
 #define LV_USE_EVDEV    0
 
 /*Drivers for LCD devices connected via SPI/parallel port*/
@@ -929,7 +934,7 @@
 #define LV_USE_DEMO_STRESS 1
 
 /*Music player demo*/
-#define LV_USE_DEMO_MUSIC 0
+#define LV_USE_DEMO_MUSIC 1
 #if LV_USE_DEMO_MUSIC
     #define LV_DEMO_MUSIC_SQUARE    0
     #define LV_DEMO_MUSIC_LANDSCAPE 0
