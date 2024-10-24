@@ -1,119 +1,52 @@
-# LVGL on top of Linux graphics stack
+![image](https://github.com/user-attachments/assets/7d3c8d78-1f50-4712-b1ff-67da56d2cc6d)# 基于lvgl9.1的车载UI系统
+## 运行平台
+Ubuntu22.04或GEC6818开发板
 
-Example project to use LVGL on top of Linux graphics stack.
-Currently supported backends are either legacy framebuffer
-(fbdev), modern DRM/KMS, or SDL2.
+## 实现功能
+- 音乐播放器
+- 视频播放器
+- 地图显示
+- 时间显示
+- 天气显示
+- 车俩数据可控
+- 通讯录
+## 运行截图
+主界面
 
-By default, legacy framebuffer backend uses `/dev/fb0` device node,
-DRM/KMS backend uses '/dev/dri/card0' card node, SDL2 uses window
-resolution of 800x480.
+![image](https://github.com/user-attachments/assets/eda2ae3d-7bb3-4566-8a02-407eaaef9067)
 
-Check out this blog post for a step by step tutorial:
-https://blog.lvgl.io/2018-01-03/linux_fb
+音乐播放器
 
-## Clone the project
+![image](https://github.com/user-attachments/assets/11ec2814-99d7-43e2-9aa6-8f97817097f0)
 
-Clone the LVGL Framebuffer Demo project and its related sub modules.
+视频播放器
 
+![image](https://github.com/user-attachments/assets/f48fc5f9-0832-4ec7-b7bb-96c214fb62ba)
+
+地图显示
+
+![image](https://github.com/user-attachments/assets/72303e8f-0130-4448-b84d-bc4113c478e3)
+
+通讯录
+
+![image](https://github.com/user-attachments/assets/7e02d0d6-0f2b-4884-95dc-be4f7bc1540a)
+
+
+## 编译命令
 ```
-git clone https://github.com/lvgl/lv_port_linux.git
-cd lv_port_linux/
-git submodule update --init --recursive
+make clean
+
+make -j16
 ```
+## 编译后运行时的文件结构
+- build/bin/   存放make后 生成的可执行 main
+- my_demo/data 存放的资源文件
 
-## Select graphics backend (optional)
+## 运行前置步骤
+- 将my_demo/data 和build/bin/main 复制到虚拟机，并保证处在同一目录下
 
-To use legacy framebuffer (fbdev) support, adjust `lv_conf.h` as follows:
+## 运行命令
+在可执行文件目录下
 ```
-#define LV_USE_LINUX_FBDEV	1
-#define LV_USE_LINUX_DRM	0
-#define LV_USE_SDL		0
-```
-
-To use modern DRM/KMS support, adjust `lv_conf.h` as follows:
-```
-#define LV_USE_LINUX_FBDEV	0
-#define LV_USE_LINUX_DRM	1
-#define LV_USE_SDL		0
-```
-
-To use SDL2 support, adjust `lv_conf.h` as follows:
-```
-#define LV_USE_LINUX_FBDEV	0
-#define LV_USE_LINUX_DRM	0
-#define LV_USE_SDL		1
-```
-
-## Build the project (cmake or Makefile)
-
-### cmake
-
-```
-mkdir build
-cd build 
-cmake ..
-make -j
-```
-
-### Makefile
-
-```
-make -j
-```
-
-## Environment variables
-
-Environment variables can be set to modify behavior of the demo.
-The following variables are supported.
-
-### Legacy framebuffer (fbdev)
-
-- `LV_LINUX_FBDEV_DEVICE` - override default (`/dev/fb0`) framebuffer device node.
-
-### DRM/KMS
-
-- `LV_LINUX_DRM_CARD` - override default (`/dev/dri/card0`) card.
-
-### SDL2
-
-- `LV_SDL_VIDEO_WIDTH` - width of SDL2 surface (default `800`).
-- `LV_SDL_VIDEO_HEIGHT` - height of SDL2 surface (default `480`).
-
-## Run the demo application
-
-### As root
-
-Normal users don't have access to `/dev/fb0` so use `sudo` (or see below) : 
-
-cmake:
-```
-cd ../bin
-sudo main
-```
-
-Makefile:
-```
-cd build/bin/
-sudo main
-```
-
-### Userland
-
-You can give a normal user access to the framebuffer by adding them to the `video` group : 
-
-
-cmake:
-```
-sudo adduser $USER video
-newgrp video
-cd ../bin
-./main
-```
-
-Makefile:
-```
-sudo adduser $USER video
-newgrp video
-cd build/bin/
 ./main
 ```
