@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/7d3c8d78-1f50-4712-b1ff-67da56d2cc6d)# 基于lvgl9.1的车载UI系统
+# 基于lvgl9.1的车载UI系统
 ## 运行平台
 Ubuntu22.04或GEC6818开发板
 
